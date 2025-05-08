@@ -95,10 +95,10 @@ export default function About() {
 					>
 						<div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-blue-400/20 rounded-lg" />
 						<Image
-							src="/placeholder-about.jpg"
+							src="/headshot.jpg"
 							alt="About Me"
 							fill
-							className="object-cover rounded-lg"
+							className="object-cover object-top rounded-lg"
 						/>
 					</motion.div>
 				</div>
