@@ -3,10 +3,9 @@
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { buttonVariants } from "./ui/button";
 
-// Static predefined dots to prevent hydration errors
 const STATIC_DOTS = [
 	{
 		id: "blur-dot-1",
@@ -14,7 +13,7 @@ const STATIC_DOTS = [
 		height: "250px",
 		left: "5%",
 		top: "5%",
-		background: "rgba(167, 139, 250, 0.3)", // purple-400
+		background: "rgba(167, 139, 250, 0.3)",
 	},
 	{
 		id: "blur-dot-2",
@@ -22,7 +21,7 @@ const STATIC_DOTS = [
 		height: "200px",
 		left: "85%",
 		top: "15%",
-		background: "rgba(96, 165, 250, 0.3)", // blue-400
+		background: "rgba(96, 165, 250, 0.3)",
 	},
 	{
 		id: "blur-dot-3",
@@ -30,7 +29,7 @@ const STATIC_DOTS = [
 		height: "300px",
 		left: "75%",
 		top: "65%",
-		background: "rgba(139, 92, 246, 0.3)", // purple-500
+		background: "rgba(139, 92, 246, 0.3)",
 	},
 	{
 		id: "blur-dot-4",
@@ -38,7 +37,7 @@ const STATIC_DOTS = [
 		height: "220px",
 		left: "25%",
 		top: "75%",
-		background: "rgba(147, 197, 253, 0.3)", // blue-300
+		background: "rgba(147, 197, 253, 0.3)",
 	},
 	{
 		id: "blur-dot-6",
@@ -46,7 +45,7 @@ const STATIC_DOTS = [
 		height: "150px",
 		left: "5%",
 		top: "85%",
-		background: "rgba(129, 140, 248, 0.3)", // indigo-400
+		background: "rgba(129, 140, 248, 0.3)",
 	},
 ];
 
@@ -55,13 +54,13 @@ export default function Hero() {
 
 	return (
 		<motion.section
+			id="hero"
 			ref={heroRef}
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{ duration: 0.5 }}
 			className="relative w-full h-screen flex items-center justify-center"
 		>
-			{/* Background blurred dots - using static values to prevent hydration errors */}
 			<div className="absolute inset-0">
 				{STATIC_DOTS.map((dot) => (
 					<div
@@ -74,13 +73,12 @@ export default function Hero() {
 							top: dot.top,
 							background: dot.background,
 							filter: "blur(60px)",
-							transform: "translate3d(0, 0, 0)", // Force GPU acceleration
+							transform: "translate3d(0, 0, 0)",
 						}}
 					/>
 				))}
 			</div>
 
-			{/* Hero content */}
 			<div className="container z-10 px-4 sm:px-6 flex flex-col items-center text-center">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
@@ -128,7 +126,6 @@ export default function Hero() {
 					</Link>
 				</motion.div>
 
-				{/* Animated arrow indicator */}
 				<motion.div
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1, y: [0, 10, 0] }}

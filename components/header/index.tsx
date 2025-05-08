@@ -11,7 +11,7 @@ import MobileNav from "./mobile-nav";
 export const navItems = [
 	{
 		label: "Home",
-		href: "/",
+		href: "#hero",
 		target: false,
 	},
 	{
@@ -102,7 +102,7 @@ export function Header() {
 					className="flex items-center"
 				>
 					<Link
-						href="/"
+						href="/#hero"
 						aria-label="Home page"
 						className="flex items-center shrink-0"
 					>
