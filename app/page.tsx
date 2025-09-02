@@ -1,19 +1,11 @@
-"use client";
-
-import About from "@/components/about";
-import Hero from "@/components/hero";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
 export default function Home() {
-	return (
-		<div className="flex flex-col min-h-screen">
-			<Hero />
-			<About />
-
-			{/* Other sections will go here */}
-			<div id="skills" />
-			<div id="experience" />
-			<div id="projects" />
-			<div id="contact" />
-		</div>
-	);
+  return (
+    <main className="flex min-h-screen flex-col items-center">
+      <Header />
+      <Footer />
+    </main>
+  );
 }
