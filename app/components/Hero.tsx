@@ -19,7 +19,7 @@ export default function Hero() {
       <Link href="#about" className="absolute top-3/4 animate-bounce">
         <ArrowDown className="w-8 h-8 text-neutral-700" />
       </Link>
-      <div className="absolute bottom-0 container border-b-4 border-dashed" />
+      <div className="absolute bottom-0 container h-px bg-gray-600" />
     </div>
   );
 }

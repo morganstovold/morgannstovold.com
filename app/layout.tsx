@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cookie, Fira_Mono, Roboto } from "next/font/google";
+import { Fira_Mono, Playfair_Display, Roboto } from "next/font/google";
 import "./globals.css";
 
 const robotoSans = Roboto({
@@ -12,10 +12,9 @@ const robotoMono = Fira_Mono({
   weight: "400",
 });
 
-const greatVibes = Cookie({
-  variable: "--font-great-vibes",
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: "400",
+  variable: "--font-playfair",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${robotoSans.variable} ${robotoMono.variable} ${greatVibes.variable} antialiased`}
+        className={`${robotoSans.variable} ${robotoMono.variable} ${playfair.variable} antialiased`}
       >
         {children}
       </body>

@@ -10,103 +10,55 @@ export default function About() {
     >
       {/* Background Effects */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 size-32 rounded-full bg-blue-500 mix-blend-multiply opacity-20 blur-xl"></div>
-        <div className="absolute bottom-1/3 right-1/3 size-40 rounded-full bg-purple-500 mix-blend-multiply opacity-15 blur-xl"></div>
+        <div className="absolute top-20 left-1/6 size-32 rounded-full bg-blue-500 mix-blend-multiply opacity-20 blur-xl"></div>
+        <div className="absolute bottom-20 right-1/6 size-40 rounded-full bg-purple-500 mix-blend-multiply opacity-15 blur-xl"></div>
       </div>
 
       <div className="container grid grid-cols-2 gap-16 items-center">
-        {/* Left Side - Content */}
         <div className="flex flex-col gap-8">
           <div>
-            <h2 className="font-sans text-5xl font-black text-neutral-700 mb-4">
+            <h2 className="font-sans text-6xl md:text-7xl font-bold text-neutral-800 mb-6">
               About Me
             </h2>
-            <p className="font-mono text-xl text-neutral-600 max-w-lg leading-relaxed">
-              Full-stack developer with 6 years of experience building modern
-              web applications. Currently exploring AI-assisted development and
-              mobile solutions.
+            <p className="font-mono text-lg text-neutral-600 max-w-xl leading-relaxed">
+              Full-stack developer with 6 years of experience building modern,
+              performant, and scalable web applications. I thrive at the
+              intersection of elegant design and robust engineering, with a
+              current focus on AI-assisted development and mobile solutions.
             </p>
           </div>
 
-          {/* Skills Grid */}
-          <div className="grid grid-cols-2 gap-6">
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-neutral-100 rounded-lg">
-                <Code className="w-6 h-6 text-neutral-700" />
-              </div>
-              <div>
-                <h3 className="font-sans font-bold text-neutral-700">
-                  Frontend
-                </h3>
-                <p className="font-mono text-sm text-neutral-500">
-                  Next.js, React, TypeScript
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-neutral-100 rounded-lg">
-                <Database className="w-6 h-6 text-neutral-700" />
-              </div>
-              <div>
-                <h3 className="font-sans font-bold text-neutral-700">
-                  Backend
-                </h3>
-                <p className="font-mono text-sm text-neutral-500">
-                  Node.js, PostgreSQL, APIs
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-neutral-100 rounded-lg">
-                <Smartphone className="w-6 h-6 text-neutral-700" />
-              </div>
-              <div>
-                <h3 className="font-sans font-bold text-neutral-700">Mobile</h3>
-                <p className="font-mono text-sm text-neutral-500">
-                  React Native, Expo
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-neutral-100 rounded-lg">
-                <Palette className="w-6 h-6 text-neutral-700" />
-              </div>
-              <div>
-                <h3 className="font-sans font-bold text-neutral-700">Design</h3>
-                <p className="font-mono text-sm text-neutral-500">
-                  TailwindCSS, Figma, UX
-                </p>
-              </div>
+          {/* Simplified Skills List */}
+          <div className="font-sans text-neutral-700 border-t border-neutral-300 pt-6">
+            <h3 className="font-bold text-lg mb-4 tracking-widest uppercase text-neutral-500">
+              Core Technologies
+            </h3>
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-md">
+              <span>Next.js</span>
+              <span>TypeScript</span>
+              <span>React & React Native</span>
+              <span>Node.js</span>
+              <span>PostgreSQL</span>
+              <span>TailwindCSS</span>
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="flex gap-8">
+          {/* Integrated Stats */}
+          <div className="flex gap-12 pt-4">
             <div>
-              <span className="block font-sans text-3xl font-black text-neutral-700">
+              <span className="block font-sans text-4xl font-bold text-neutral-800">
                 6+
               </span>
-              <span className="font-mono text-sm text-neutral-500">
+              <span className="font-sans text-sm text-neutral-500 tracking-wider">
                 Years Experience
               </span>
             </div>
             <div>
-              <span className="block font-sans text-3xl font-black text-neutral-700">
+              <span className="block font-sans text-4xl font-bold text-neutral-800">
                 20+
               </span>
-              <span className="font-mono text-sm text-neutral-500">
+              <span className="font-sans text-sm text-neutral-500 tracking-wider">
                 Projects Delivered
-              </span>
-            </div>
-            <div>
-              <span className="block font-sans text-3xl font-black text-neutral-700">
-                4+
-              </span>
-              <span className="font-mono text-sm text-neutral-500">
-                Years Freelancing
               </span>
             </div>
           </div>
@@ -117,15 +69,17 @@ export default function About() {
           <div className="relative size-128">
             {/* Dashed Circle - Top Half (behind image) */}
             <div className="absolute inset-0 -z-10">
-              <svg className="w-full h-full" viewBox="0 0 384 384">
+              <svg
+                className="w-full h-full stroke-gray-600"
+                viewBox="0 0 384 384"
+              >
                 <title>Decorative Circle</title>
                 <path
                   d="M 32 192 A 160 160 0 0 1 352 192"
                   fill="none"
-                  stroke="rgb(115 115 115)"
-                  strokeWidth="3"
-                  strokeDasharray="8 8"
-                  strokeLinecap="round"
+                  stroke="inherit"
+                  strokeWidth="2"
+                  strokeDasharray="10 6"
                 />
               </svg>
             </div>
@@ -137,15 +91,17 @@ export default function About() {
 
             {/* Dashed Circle - Bottom Half (in front of image) */}
             <div className="absolute inset-0 -z-10">
-              <svg className="w-full h-full" viewBox="0 0 384 384">
+              <svg
+                className="w-full h-full stroke-gray-600"
+                viewBox="0 0 384 384"
+              >
                 <title>Decorative Circle</title>
                 <path
                   d="M 352 192 A 160 160 0 0 1 192 352 A 160 160 0 0 1 32 192"
                   fill="none"
-                  stroke="rgb(115 115 115)"
-                  strokeWidth="3"
-                  strokeDasharray="8 8"
-                  strokeLinecap="round"
+                  stroke="inherit"
+                  strokeWidth="2"
+                  strokeDasharray="10 6"
                 />
               </svg>
             </div>
