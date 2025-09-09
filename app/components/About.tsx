@@ -1,114 +1,100 @@
-import { Code, Database, Palette, Smartphone } from "lucide-react";
-import Image from "next/image";
-import Headshot from "@/public/headshot-removed.png";
-
 export default function About() {
   return (
-    <section
-      id="about"
-      className="w-full min-h-screen flex items-center justify-center relative"
-    >
-      {/* Background Effects */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 left-1/6 size-32 rounded-full bg-blue-500 mix-blend-multiply opacity-20 blur-xl"></div>
-        <div className="absolute bottom-20 right-1/6 size-40 rounded-full bg-purple-500 mix-blend-multiply opacity-15 blur-xl"></div>
-      </div>
-
-      <div className="container grid grid-cols-2 gap-16 items-center">
-        <div className="flex flex-col gap-8">
-          <div>
-            <h2 className="font-sans text-6xl md:text-7xl font-bold text-neutral-800 mb-6">
-              About Me
-            </h2>
-            <p className="font-mono text-lg text-neutral-600 max-w-xl leading-relaxed">
-              Full-stack developer with 6 years of experience building modern,
-              performant, and scalable web applications. I thrive at the
-              intersection of elegant design and robust engineering, with a
-              current focus on AI-assisted development and mobile solutions.
-            </p>
-          </div>
-
-          {/* Simplified Skills List */}
-          <div className="font-sans text-neutral-700 border-t border-neutral-300 pt-6">
-            <h3 className="font-bold text-lg mb-4 tracking-widest uppercase text-neutral-500">
-              Core Technologies
-            </h3>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 text-md">
-              <span>Next.js</span>
-              <span>TypeScript</span>
-              <span>React & React Native</span>
-              <span>Node.js</span>
-              <span>PostgreSQL</span>
-              <span>TailwindCSS</span>
-            </div>
-          </div>
-
-          {/* Integrated Stats */}
-          <div className="flex gap-12 pt-4">
-            <div>
-              <span className="block font-sans text-4xl font-bold text-neutral-800">
-                6+
-              </span>
-              <span className="font-sans text-sm text-neutral-500 tracking-wider">
-                Years Experience
-              </span>
-            </div>
-            <div>
-              <span className="block font-sans text-4xl font-bold text-neutral-800">
-                20+
-              </span>
-              <span className="font-sans text-sm text-neutral-500 tracking-wider">
-                Projects Delivered
-              </span>
-            </div>
-          </div>
+    <section id="about" className="py-32 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Section header */}
+        <div className="mb-20 text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-4">
+            ABOUT
+          </p>
+          <h2 className="text-5xl md:text-6xl font-playfair font-light text-gray-900">
+            Who I Am
+          </h2>
         </div>
 
-        {/* Right Side - Image with Circle Design */}
-        <div className="flex justify-center items-center relative">
-          <div className="relative size-128">
-            {/* Dashed Circle - Top Half (behind image) */}
-            <div className="absolute inset-0 -z-10">
-              <svg
-                className="w-full h-full stroke-gray-600"
-                viewBox="0 0 384 384"
-              >
-                <title>Decorative Circle</title>
-                <path
-                  d="M 32 192 A 160 160 0 0 1 352 192"
-                  fill="none"
-                  stroke="inherit"
-                  strokeWidth="2"
-                  strokeDasharray="10 6"
-                />
-              </svg>
+        <div className="grid md:grid-cols-2 gap-20 items-start max-w-6xl mx-auto">
+          {/* Left side - Story */}
+          <div className="space-y-8">
+            <div>
+              <p className="text-lg leading-relaxed font-light text-gray-700 mb-6">
+                I'm an 18-year-old passionate developer currently studying
+                Computer Science at Diablo Valley Community College, with plans
+                to complete my master's at UC Berkeley.
+              </p>
+              <p className="text-lg leading-relaxed font-light text-gray-700">
+                With 6 years of programming experience, I've cultivated a deep
+                understanding of both the technical and creative aspects of
+                software development. My approach focuses on creating solutions
+                that are not only functional but elegantly crafted.
+              </p>
             </div>
 
-            {/* Image */}
-            <div className="absolute inset-0 flex justify-center items-end">
-              <Image src={Headshot} alt="Morgan Stovold" className="w-84" />
+            {/* Philosophy - no border, just typography */}
+            <div className="pt-8">
+              <p className="text-2xl font-playfair font-light italic leading-relaxed text-gray-800">
+                "Code is poetry written for two audiences: machines and humans.
+                I strive to make both experiences exceptional."
+              </p>
+            </div>
+          </div>
+
+          {/* Right side - Simplified education */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-8">
+                EDUCATION JOURNEY
+              </h3>
+
+              <div className="space-y-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-2 h-2 bg-gray-900 rounded-full mt-2" />
+                  <div className="flex-1">
+                    <p className="font-normal text-gray-900 mb-1">
+                      Diablo Valley College
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      Computer Science • 2025 - Present
+                    </p>
+                    <p className="text-sm text-gray-600 mt-2">
+                      Building strong foundations in algorithms, data
+                      structures, and software engineering principles.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-2 h-2 bg-gray-300 rounded-full mt-2" />
+                  <div className="flex-1">
+                    <p className="font-normal text-gray-600 mb-1">
+                      UC Berkeley
+                    </p>
+                    <p className="text-sm text-gray-400">
+                      Master's Degree • Future Goal
+                    </p>
+                    <p className="text-sm text-gray-500 mt-2">
+                      Aspiring to deepen expertise in distributed systems and
+                      machine learning applications.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Dashed Circle - Bottom Half (in front of image) */}
-            <div className="absolute inset-0 -z-10">
-              <svg
-                className="w-full h-full stroke-gray-600"
-                viewBox="0 0 384 384"
-              >
-                <title>Decorative Circle</title>
-                <path
-                  d="M 352 192 A 160 160 0 0 1 192 352 A 160 160 0 0 1 32 192"
-                  fill="none"
-                  stroke="inherit"
-                  strokeWidth="2"
-                  strokeDasharray="10 6"
-                />
-              </svg>
+            {/* Simple focus areas - no cards */}
+            <div className="grid grid-cols-2 gap-8 pt-8">
+              <div>
+                <p className="text-xs uppercase tracking-wider text-gray-400 mb-2">
+                  FOCUS
+                </p>
+                <p className="text-gray-700">Clean Architecture</p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider text-gray-400 mb-2">
+                  PASSION
+                </p>
+                <p className="text-gray-700">User Experience</p>
+              </div>
             </div>
-
-            <div className="absolute -top-4 -right-4 w-8 h-8 bg-blue-500 rounded-full opacity-60"></div>
-            <div className="absolute -bottom-6 -left-6 w-12 h-12 bg-orange-500 rounded-full opacity-40"></div>
-            <div className="absolute top-1/2 -left-8 w-6 h-6 bg-purple-500 rounded-full opacity-50"></div>
           </div>
         </div>
       </div>
