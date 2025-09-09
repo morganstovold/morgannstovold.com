@@ -49,50 +49,79 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-32 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="skills" className="py-20 sm:py-24 md:py-32 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section header */}
-        <div className="mb-20 text-center">
+        <div className="mb-12 sm:mb-16 md:mb-20 text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-4">
             EXPERTISE
           </p>
-          <h2 className="text-5xl md:text-6xl font-playfair font-light text-gray-900">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-light text-gray-900">
             Technical Proficiency
           </h2>
         </div>
 
-        {/* Skills grid - minimal design */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 max-w-6xl mx-auto">
+        {/* Skills grid - mobile optimized with centered cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-x-12 lg:gap-y-16 max-w-6xl mx-auto">
           {skills.map((skill) => (
             <div key={skill.title} className="group">
-              {/* Icon and title */}
-              <div className="flex items-center gap-4 mb-3">
-                <span className="text-2xl text-gray-400">{skill.icon}</span>
-                <h3 className="text-lg font-normal text-gray-900">
-                  {skill.title}
-                </h3>
+              {/* Mobile: Card style, Desktop: Original minimal style */}
+              <div className="sm:hidden bg-white rounded-xl p-6 shadow-sm">
+                {/* Icon and title - centered on mobile */}
+                <div className="flex flex-col items-center text-center mb-4">
+                  <span className="text-3xl text-gray-400 mb-3">
+                    {skill.icon}
+                  </span>
+                  <h3 className="text-lg font-normal text-gray-900 mb-2">
+                    {skill.title}
+                  </h3>
+                  <p className="text-xs text-gray-500">{skill.description}</p>
+                </div>
+
+                {/* Skills tags - centered */}
+                <div className="flex flex-wrap justify-center gap-2">
+                  {skill.items.map((item) => (
+                    <span
+                      key={item}
+                      className="px-3 py-1 bg-gray-50 text-gray-600 text-xs font-light rounded-full"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              <p className="text-sm text-gray-500 mb-4">{skill.description}</p>
+              {/* Tablet and Desktop - Original design */}
+              <div className="hidden sm:block">
+                <div className="flex items-center gap-4 mb-3">
+                  <span className="text-2xl text-gray-400">{skill.icon}</span>
+                  <h3 className="text-lg font-normal text-gray-900">
+                    {skill.title}
+                  </h3>
+                </div>
 
-              {/* Skills tags - minimal styling */}
-              <div className="flex flex-wrap gap-2">
-                {skill.items.map((item) => (
-                  <span
-                    key={item}
-                    className="px-3 py-1 bg-white text-gray-600 text-xs font-light rounded-full"
-                  >
-                    {item}
-                  </span>
-                ))}
+                <p className="text-sm text-gray-500 mb-4">
+                  {skill.description}
+                </p>
+
+                <div className="flex flex-wrap gap-2">
+                  {skill.items.map((item) => (
+                    <span
+                      key={item}
+                      className="px-3 py-1 bg-white text-gray-600 text-xs font-light rounded-full"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           ))}
         </div>
 
         {/* Bottom text */}
-        <div className="mt-24 text-center max-w-3xl mx-auto">
-          <p className="text-lg leading-relaxed font-light text-gray-600">
+        <div className="mt-16 sm:mt-20 md:mt-24 text-center max-w-3xl mx-auto px-4">
+          <p className="text-base sm:text-lg leading-relaxed font-light text-gray-600">
             Specializing in rapid website development with a focus on
             performance, SEO, and exceptional user experience. Available for
             immediate project starts.

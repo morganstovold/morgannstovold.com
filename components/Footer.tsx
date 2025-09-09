@@ -1,7 +1,19 @@
-import { ArrowUpRight, Github, Instagram, Linkedin } from "lucide-react";
+"use client";
+
+import { Check, Copy, Github, Instagram, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Footer() {
+  const [copied, setCopied] = useState(false);
+  const email = "morgannstovold.work@gmail.com";
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <section
       id="contact"
@@ -25,7 +37,7 @@ export default function Footer() {
       </div>
 
       <div className="relative z-10">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+        <div className="max-w-7xl mx-auto px-6 text-center relative flex flex-col items-center">
           {/* Main CTA heading */}
           <h2 className="text-6xl md:text-7xl lg:text-8xl font-playfair font-light text-primary-foreground mb-4">
             Let's work together.
@@ -34,14 +46,32 @@ export default function Footer() {
             I'm available for freelance work.
           </p>
 
-          {/* CTA Button with consistent styling */}
-          <Link
-            href="mailto:hello@example.com"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-card text-card-foreground font-light tracking-wide rounded-full hover:bg-muted transition-all hover:scale-105 duration-300 text-lg"
-          >
-            SAY HELLO
-            <ArrowUpRight className="w-5 h-5" />
-          </Link>
+          {/* Email with copy functionality */}
+          <div className="flex items-center gap-6 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+            <Mail className="size-5 text-primary-foreground/80" />
+            <span className="text-primary-foreground font-light tracking-wide">
+              {email}
+            </span>
+            <button
+              type="button"
+              onClick={handleCopyEmail}
+              className="p-2 hover:bg-white/10 rounded-lg transition-all duration-200"
+              aria-label="Copy email address"
+            >
+              {copied ? (
+                <Check className="size-5 text-green-400" />
+              ) : (
+                <Copy className="size-5 text-primary-foreground/60 hover:text-primary-foreground" />
+              )}
+            </button>
+          </div>
+
+          {/* Tooltip for copied state */}
+          {copied && (
+            <p className="absolute -bottom-10 text-sm text-green-400 animate-fade-in">
+              Email copied to clipboard!
+            </p>
+          )}
         </div>
       </div>
 
