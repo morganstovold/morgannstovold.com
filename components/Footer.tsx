@@ -96,12 +96,6 @@ export default function Footer() {
               >
                 <Linkedin className="w-5 h-5" />
               </Link>
-              <Link
-                href="https://www.linkedin.com/in/morgan-stovold-428b0b354/"
-                className="text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-300"
-              >
-                <Linkedin className="w-5 h-5" />
-              </Link>
             </div>
           </div>
         </div>
