@@ -17,7 +17,7 @@ export default function Footer() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-background-dark py-24 md:py-32"
+      className="relative overflow-hidden bg-background-dark py-24 md:py-32 md:pb-24"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -35,7 +35,6 @@ export default function Footer() {
           }}
         />
       </div>
-
       <div className="relative z-10">
         <div className="max-w-7xl mx-auto px-6 text-center relative flex flex-col items-center">
           {/* Main CTA heading */}
@@ -47,24 +46,21 @@ export default function Footer() {
           </p>
 
           {/* Email with copy functionality */}
-          <div className="flex items-center gap-6 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-            <Mail className="size-5 text-primary-foreground/80" />
-            <span className="text-primary-foreground font-light tracking-wide">
+          <button
+            type="button"
+            className="flex items-center gap-6 px-6 py-4 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 group hover:bg-white/20 transition-colors"
+            onClick={handleCopyEmail}
+          >
+            <Mail className="size-5 text-primary-foreground/80 group-hover:text-primary-foreground transition-colors" />
+            <span className="text-primary-foreground/80 font-light tracking-wide text-[clamp(0.875rem,2vw,1rem)] select-none group-hover:text-primary-foreground">
               {email}
             </span>
-            <button
-              type="button"
-              onClick={handleCopyEmail}
-              className="p-2 hover:bg-white/10 rounded-lg transition-all duration-200"
-              aria-label="Copy email address"
-            >
-              {copied ? (
-                <Check className="size-5 text-green-400" />
-              ) : (
-                <Copy className="size-5 text-primary-foreground/60 hover:text-primary-foreground" />
-              )}
-            </button>
-          </div>
+            {copied ? (
+              <Check className="size-5 text-green-400" />
+            ) : (
+              <Copy className="size-5 text-primary-foreground/60 group-hover:text-primary-foreground transition-colors" />
+            )}
+          </button>
 
           {/* Tooltip for copied state */}
           {copied && (
@@ -74,8 +70,7 @@ export default function Footer() {
           )}
         </div>
       </div>
-
-      {/* Footer bottom */}
+      {/* Footer bottom */}d
       <div className="relative z-10 mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-primary-foreground/10">
@@ -84,19 +79,25 @@ export default function Footer() {
             </p>
             <div className="flex gap-6">
               <Link
-                href="#"
+                href="https://www.instagram.com/morgan_stovold/"
                 className="text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-300"
               >
                 <Instagram className="w-5 h-5" />
               </Link>
               <Link
-                href="#"
+                href="https://github.com/morganstovold"
                 className="text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-300"
               >
                 <Github className="w-5 h-5" />
               </Link>
               <Link
-                href="#"
+                href="https://www.linkedin.com/in/morgan-stovold-428b0b354/"
+                className="text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-300"
+              >
+                <Linkedin className="w-5 h-5" />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/in/morgan-stovold-428b0b354/"
                 className="text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-300"
               >
                 <Linkedin className="w-5 h-5" />
