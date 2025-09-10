@@ -13,7 +13,7 @@ export default function Projects() {
     },
     {
       title: "East Bay Blinds",
-      category: "E-COMMERCE WEBSITE",
+      category: "MODERN WEBSITE",
       status: "Live",
       description:
         "Complete redesign and development of a modern, fresh website for a window treatment company. Delivered a performant, SEO-optimized solution that significantly improved user experience and conversion rates.",
@@ -36,7 +36,7 @@ export default function Projects() {
     {
       title: "Got Plate Lunch",
       category: "RESTAURANT WEBSITE",
-      status: "90% Complete",
+      status: "In Development",
       description:
         "Modern, responsive website for a local Hawaiian restaurant. Features menu displays, online ordering preparation, and location information with a focus on mobile user experience.",
       tags: ["Next.js", "Tailwind CSS", "Mobile First"],
@@ -78,7 +78,7 @@ export default function Projects() {
                       ? "IN DEVELOPMENT"
                       : project.status === "Live"
                         ? "LIVE"
-                        : "90% COMPLETE"}
+                        : project.status}
                   </p>
                   <span
                     className={`w-2 h-2 rounded-full flex-shrink-0 ${
