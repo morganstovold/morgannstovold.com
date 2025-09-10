@@ -70,7 +70,7 @@ export default function Footer() {
           )}
         </div>
       </div>
-      {/* Footer bottom */}d
+      {/* Footer bottom */}
       <div className="relative z-10 mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-primary-foreground/10">
