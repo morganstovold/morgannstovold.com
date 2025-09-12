@@ -1,20 +1,25 @@
+enum ProjectStatus {
+  InDevelopment = "In Development",
+  Live = "Live",
+}
+
 export default function Projects() {
   const projects = [
     {
       title: "FieldJolt",
       category: "SAAS PLATFORM",
-      status: "In Development",
+      status: ProjectStatus.InDevelopment,
       description:
         "All-in-one field service management platform featuring extensible CRM, intelligent scheduling, dispatching, inventory management, invoicing, and proposal generation. Built for scalability and performance.",
       tags: ["Next.js", "PlanetScale", "Stripe", "QuickBooks", "Cloudflare"],
       metrics: ["Multi-tenant SaaS", "Real-time Sync", "API Integrations"],
-      link: "#",
-      featured: true,
+      link: "https://fieldjolt.com/",
+      featured: false,
     },
     {
       title: "East Bay Blinds",
       category: "MODERN WEBSITE",
-      status: "Live",
+      status: ProjectStatus.Live,
       description:
         "Complete redesign and development of a modern, fresh website for a window treatment company. Delivered a performant, SEO-optimized solution that significantly improved user experience and conversion rates.",
       tags: ["Next.js", "React", "Tailwind CSS", "SEO"],
@@ -25,21 +30,32 @@ export default function Projects() {
     {
       title: "Kelly Baldwin Realtor",
       category: "LUXURY REAL ESTATE",
-      status: "Live",
+      status: ProjectStatus.Live,
       description:
         "Sophisticated website for a local realtor emphasizing luxury aesthetics and premium user experience. Features property showcases, contact forms, and optimized performance across all devices.",
-      tags: ["Next.js", "Tailwind CSS", "Responsive Design"],
+      tags: ["Next.js", "React", "Tailwind CSS", "SEO"],
       metrics: ["10 Day Delivery", "Luxury Design", "SEO Optimized"],
       link: "https://kellybaldwin-realtor.vercel.app/",
-      featured: true,
+      featured: false,
+    },
+    {
+      title: "Upstate Flush Pros Plumbing & Drain Cleaning",
+      category: "MODERN WEBSITE",
+      status: ProjectStatus.Live,
+      description:
+        "Modern, responsive website for a new plumbing business. Features contact forms, service showcases, and optimized performance across all devices.",
+      tags: ["Next.js", "React", "Tailwind CSS", "SEO"],
+      metrics: ["3 Day Delivery", "100% PageSpeed", "Mobile First"],
+      link: "https://upstate-flush-pros-website.vercel.app/",
+      featured: false,
     },
     {
       title: "Got Plate Lunch",
       category: "RESTAURANT WEBSITE",
-      status: "In Development",
+      status: ProjectStatus.InDevelopment,
       description:
         "Modern, responsive website for a local Hawaiian restaurant. Features menu displays, online ordering preparation, and location information with a focus on mobile user experience.",
-      tags: ["Next.js", "Tailwind CSS", "Mobile First"],
+      tags: ["Next.js", "React", "Tailwind CSS", "Mobile First"],
       link: "https://gotplatelunch.vercel.app/",
       featured: false,
     },
@@ -74,17 +90,17 @@ export default function Projects() {
                 <div className="flex justify-between items-start mb-2">
                   <p className="text-[10px] sm:text-xs tracking-[0.15em] text-gray-400">
                     {project.category} •{" "}
-                    {project.status === "In Development"
+                    {project.status === ProjectStatus.InDevelopment
                       ? "IN DEVELOPMENT"
-                      : project.status === "Live"
+                      : project.status === ProjectStatus.Live
                         ? "LIVE"
                         : project.status}
                   </p>
                   <span
                     className={`w-2 h-2 rounded-full flex-shrink-0 ${
-                      project.status === "Live"
+                      project.status === ProjectStatus.Live
                         ? "bg-green-500"
-                        : project.status === "In Development"
+                        : project.status === ProjectStatus.InDevelopment
                           ? "bg-blue-500"
                           : "bg-yellow-500"
                     }`}
