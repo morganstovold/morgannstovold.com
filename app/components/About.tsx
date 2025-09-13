@@ -2,7 +2,6 @@ export default function About() {
   return (
     <section id="about" className="py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Section header */}
         <div className="mb-20 text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-4">
             ABOUT
@@ -13,23 +12,23 @@ export default function About() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-20 items-start max-w-6xl mx-auto">
-          {/* Left side - Story */}
           <div className="space-y-8">
             <div>
               <p className="text-lg leading-relaxed font-light text-gray-700 mb-6">
-                I'm an 18-year-old passionate developer currently studying
-                Computer Science at Diablo Valley Community College, with plans
-                to complete my master's at UC Berkeley.
+                I'm an {new Date().getFullYear() - 2007}-year-old passionate
+                developer currently studying Computer Science at Diablo Valley
+                Community College, with plans to complete my master's at UC
+                Berkeley.
               </p>
               <p className="text-lg leading-relaxed font-light text-gray-700">
-                With 6 years of programming experience, I've cultivated a deep
-                understanding of both the technical and creative aspects of
-                software development. My approach focuses on creating solutions
-                that are not only functional but elegantly crafted.
+                With {new Date().getFullYear() - 2019} years of programming
+                experience, I've cultivated a deep understanding of both the
+                technical and creative aspects of software development. My
+                approach focuses on creating solutions that are not only
+                functional but elegantly crafted.
               </p>
             </div>
 
-            {/* Philosophy - no border, just typography */}
             <div className="pt-8">
               <p className="text-2xl font-playfair font-light italic leading-relaxed text-gray-800">
                 "Code is poetry written for two audiences: machines and humans.
@@ -38,7 +37,6 @@ export default function About() {
             </div>
           </div>
 
-          {/* Right side - Simplified education */}
           <div className="space-y-8">
             <div>
               <h3 className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-8">
@@ -80,7 +78,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* Simple focus areas - no cards */}
             <div className="grid grid-cols-2 gap-8 pt-8">
               <div>
                 <p className="text-xs uppercase tracking-wider text-gray-400 mb-2">

@@ -1,8 +1,10 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { PROJECTS, STARTED_PROGRAMMING_DATE } from "@/lib/constants";
 
 export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -40,14 +42,12 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         <div className="space-y-8 md:space-y-10">
-          {/* Small intro text */}
           <div className="text-center">
             <p className="text-foreground-secondary text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-mono">
               Full-stack Developer
             </p>
           </div>
 
-          {/* Main heading */}
           <h1 className="text-center">
             <span className="block text-[clamp(2.5rem,10vw,7rem)] font-playfair font-light leading-[0.9] text-foreground mb-2 sm:mb-4">
               Creative
@@ -57,7 +57,6 @@ export default function Hero() {
             </span>
           </h1>
 
-          {/* Description */}
           <div className="max-w-2xl mx-auto text-center px-4">
             <p className="text-foreground-secondary text-base sm:text-lg leading-relaxed font-light">
               I craft maintainable, clean, and understandable code. Building
@@ -66,27 +65,38 @@ export default function Hero() {
             </p>
           </div>
 
-          {/* Call to action buttons */}
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
-            <Button size="lg" rounded className="w-full sm:w-auto">
+            <Link
+              href="#projects"
+              className={buttonVariants({
+                variant: "default",
+                size: "lg",
+                rounded: true,
+                className: "w-full sm:w-auto",
+              })}
+            >
               View Projects
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-            </Button>
-            <Button
-              size="lg"
-              rounded
-              variant="outline"
-              className="w-full sm:w-auto"
+            </Link>
+            <Link
+              href="#about"
+              className={buttonVariants({
+                variant: "outline",
+                size: "lg",
+                rounded: true,
+                className: "w-full sm:w-auto",
+              })}
             >
               Learn more about me
-            </Button>
+            </Link>
           </div>
 
-          {/* Stats - responsive grid */}
           <div className="flex flex-col sm:flex-row justify-center gap-6 sm:gap-8 md:gap-12 pt-8">
             <div className="text-center">
               <span className="block text-xl sm:text-2xl font-light text-foreground">
-                6+
+                {new Date().getFullYear() -
+                  STARTED_PROGRAMMING_DATE.getFullYear()}
+                +
               </span>
               <span className="text-xs uppercase tracking-wider text-foreground-tertiary">
                 Years Experience
@@ -104,7 +114,7 @@ export default function Hero() {
             <div className="hidden sm:block w-px h-12 bg-border/30 self-center" />
             <div className="text-center">
               <span className="block text-xl sm:text-2xl font-light text-foreground">
-                20+
+                {PROJECTS.length}+
               </span>
               <span className="text-xs uppercase tracking-wider text-foreground-tertiary">
                 Projects Delivered
@@ -114,7 +124,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Subtle scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
         <div className="w-[1px] h-12 sm:h-16 bg-gradient-to-b from-transparent via-foreground-tertiary to-transparent opacity-40" />
       </div>

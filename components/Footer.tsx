@@ -3,13 +3,13 @@
 import { Check, Copy, Github, Instagram, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { EMAIL, GITHUB, INSTAGRAM, LINKEDIN } from "@/lib/constants";
 
 export default function Footer() {
   const [copied, setCopied] = useState(false);
-  const email = "morgannstovold.work@gmail.com";
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(email);
+    navigator.clipboard.writeText(EMAIL);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -19,7 +19,6 @@ export default function Footer() {
       id="contact"
       className="relative overflow-hidden bg-background-dark py-24 md:py-32 md:pb-24"
     >
-      {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div
           className="absolute top-0 left-0 w-96 h-96 rounded-full border border-primary-foreground/10"
@@ -37,7 +36,6 @@ export default function Footer() {
       </div>
       <div className="relative z-10">
         <div className="max-w-7xl mx-auto px-6 text-center relative flex flex-col items-center">
-          {/* Main CTA heading */}
           <h2 className="text-6xl md:text-7xl lg:text-8xl font-playfair font-light text-primary-foreground mb-4">
             Let's work together.
           </h2>
@@ -45,7 +43,6 @@ export default function Footer() {
             I'm available for freelance work.
           </p>
 
-          {/* Email with copy functionality */}
           <button
             type="button"
             className="flex items-center gap-6 px-6 py-4 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 group hover:bg-white/20 transition-colors"
@@ -53,7 +50,7 @@ export default function Footer() {
           >
             <Mail className="size-5 text-primary-foreground/80 group-hover:text-primary-foreground transition-colors" />
             <span className="text-primary-foreground/80 font-light tracking-wide text-[clamp(0.875rem,2vw,1rem)] select-none group-hover:text-primary-foreground">
-              {email}
+              {EMAIL}
             </span>
             {copied ? (
               <Check className="size-5 text-green-400" />
@@ -62,7 +59,6 @@ export default function Footer() {
             )}
           </button>
 
-          {/* Tooltip for copied state */}
           {copied && (
             <p className="absolute -bottom-10 text-sm text-green-400 animate-fade-in">
               Email copied to clipboard!
@@ -70,7 +66,6 @@ export default function Footer() {
           )}
         </div>
       </div>
-      {/* Footer bottom */}
       <div className="relative z-10 mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-primary-foreground/10">
@@ -79,22 +74,22 @@ export default function Footer() {
             </p>
             <div className="flex gap-6">
               <Link
-                href="https://www.instagram.com/morgan_stovold/"
-                className="text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-300"
-              >
-                <Instagram className="w-5 h-5" />
-              </Link>
-              <Link
-                href="https://github.com/morganstovold"
+                href={GITHUB}
                 className="text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-300"
               >
                 <Github className="w-5 h-5" />
               </Link>
               <Link
-                href="https://www.linkedin.com/in/morgan-stovold-428b0b354/"
+                href={LINKEDIN}
                 className="text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-300"
               >
                 <Linkedin className="w-5 h-5" />
+              </Link>
+              <Link
+                href={INSTAGRAM}
+                className="text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-300"
+              >
+                <Instagram className="w-5 h-5" />
               </Link>
             </div>
           </div>

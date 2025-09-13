@@ -38,7 +38,6 @@ export default function Header() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
-        {/* Logo */}
         <Link href="/" className="group">
           <span
             className={`font-playfair text-xl md:text-2xl font-normal transition-colors duration-200 ${
@@ -50,7 +49,6 @@ export default function Header() {
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
         <div className="hidden md:flex gap-8 items-center">
           <Link
             href="#about"
@@ -83,7 +81,7 @@ export default function Header() {
             Projects
           </Link>
           <Link
-            href="mailto:morgannstovold.work@gmail.com"
+            href="#contact"
             className="inline-flex items-center gap-2 px-4 py-2 bg-background-dark text-white font-normal tracking-wide rounded-full border border-transparent hover:border-neutral-400 hover:bg-background hover:text-background-dark transition-colors duration-200 text-sm"
           >
             CONTACT
@@ -91,7 +89,6 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Mobile Navigation with Sheet */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="md:hidden">
             <button
@@ -110,7 +107,6 @@ export default function Header() {
               <SheetTitle>Sidebar</SheetTitle>
               <SheetDescription>Displays the mobile sidebar.</SheetDescription>
             </SheetHeader>
-            {/* Custom header without using SheetHeader */}
             <div className="px-6 py-6 border-b border-neutral-100">
               <span className="font-playfair text-2xl font-normal text-neutral-950">
                 MORGAN
@@ -120,7 +116,6 @@ export default function Header() {
               </span>
             </div>
 
-            {/* Navigation content with proper spacing */}
             <nav className="flex flex-col flex-1 px-6">
               <Link
                 href="#about"
@@ -146,7 +141,7 @@ export default function Header() {
 
               <div className="mt-6">
                 <Link
-                  href="mailto:morgannstovold.work@gmail.com"
+                  href="#contact"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-background-dark text-white font-normal tracking-wide rounded-full border border-transparent hover:border-neutral-400 hover:bg-background hover:text-background-dark transition-colors duration-200 text-sm"
                 >
                   CONTACT
@@ -155,7 +150,6 @@ export default function Header() {
               </div>
             </nav>
 
-            {/* Footer */}
             <div className="px-6 py-6 border-t border-neutral-100 mt-auto">
               <p className="text-xs text-neutral-400 text-center">
                 © {new Date().getFullYear()} Morgan Stovold

@@ -62,8 +62,8 @@
   --background: oklch(0.985 0.005 60); /* Warm off-white #FDFCFB */
   --background-dark: oklch(0.15 0.01 200); /* Deep navy #1A1F2E */
   --foreground: oklch(0.2 0.01 200); /* Soft black #2C3444 */
-  --foreground-secondary: oklch(0.5 0.02 200); /* Muted blue-gray #6B7280 */
-  --foreground-tertiary: oklch(0.65 0.01 200); /* Light gray #9CA3AF */
+  --foreground-secondary: oklch(0.45 0.02 200); /* Darker muted blue-gray for better contrast */
+  --foreground-tertiary: oklch(0.55 0.01 200); /* Darker gray for better contrast */
   
   --card: oklch(1 0 0); /* Pure white #FFFFFF */
   --card-foreground: oklch(0.2 0.01 200); /* Matches foreground */
@@ -78,7 +78,7 @@
   --secondary-foreground: oklch(0.2 0.01 200);
   
   --muted: oklch(0.95 0.005 60); /* Light warm gray */
-  --muted-foreground: oklch(0.45 0.02 200); /* Medium gray */
+  --muted-foreground: oklch(0.4 0.02 200); /* Darker medium gray for better contrast */
   
   --accent: oklch(0.25 0.01 200); /* Dark accent */
   --accent-foreground: oklch(0.985 0.005 60);
@@ -118,8 +118,8 @@
   --background: oklch(0.15 0.01 200); /* Deep navy */
   --background-dark: oklch(0.985 0.005 60); /* Warm white */
   --foreground: oklch(0.95 0.005 60); /* Off-white */
-  --foreground-secondary: oklch(0.7 0.01 60);
-  --foreground-tertiary: oklch(0.5 0.01 60);
+  --foreground-secondary: oklch(0.75 0.01 60); /* Lighter for dark mode contrast */
+  --foreground-tertiary: oklch(0.6 0.01 60); /* Lighter for dark mode contrast */
   
   --card: oklch(0.18 0.01 200);
   --card-foreground: oklch(0.95 0.005 60);
@@ -134,7 +134,7 @@
   --secondary-foreground: oklch(0.95 0.005 60);
   
   --muted: oklch(0.22 0.01 200);
-  --muted-foreground: oklch(0.65 0.01 60);
+  --muted-foreground: oklch(0.7 0.01 60); /* Lighter for dark mode contrast */
   
   --accent: oklch(0.25 0.01 200);
   --accent-foreground: oklch(0.95 0.005 60);
