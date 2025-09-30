@@ -25,6 +25,17 @@ export const PROJECTS = [
     featured: false,
   },
   {
+    title: "Padilla Design & Build",
+    category: "MODERN WEBSITE",
+    status: ProjectStatus.Live,
+    description:
+      "Complete website rebuild for a construction and remodeling company. Transformed a basic GoDaddy template into a modern, high-performance site with perfect Lighthouse scores. Features integrated Jobber contact form and optimized SEO to increase local visibility.",
+    tags: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "SEO"],
+    metrics: ["7 Day Delivery", "100% PageSpeed", "Mobile First"],
+    link: "https://padilla-construction.vercel.app/",
+    featured: false,
+  },
+  {
     title: "East Bay Blinds",
     category: "MODERN WEBSITE",
     status: ProjectStatus.Live,
