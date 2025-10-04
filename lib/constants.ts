@@ -58,17 +58,6 @@ export const PROJECTS = [
     featured: false,
   },
   {
-    title: "Upstate Flush Pros Plumbing & Drain Cleaning",
-    category: "MODERN WEBSITE",
-    status: ProjectStatus.Live,
-    description:
-      "Modern, responsive website for a new plumbing business. Features contact forms, service showcases, and optimized performance across all devices.",
-    tags: ["Next.js", "React", "Tailwind CSS", "SEO"],
-    metrics: ["3 Day Delivery", "100% PageSpeed", "Mobile First"],
-    link: "https://upstate-flush-pros-website.vercel.app/",
-    featured: false,
-  },
-  {
     title: "Got Plate Lunch",
     category: "RESTAURANT WEBSITE",
     status: ProjectStatus.InDevelopment,
