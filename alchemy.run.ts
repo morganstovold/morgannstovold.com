@@ -1,0 +1,105 @@
+import * as Alchemy from "alchemy";
+import * as Cloudflare from "alchemy/Cloudflare";
+import * as GitHub from "alchemy/GitHub";
+import * as Output from "alchemy/Output";
+import * as Config from "effect/Config";
+import * as Effect from "effect/Effect";
+import * as Layer from "effect/Layer";
+import * as Redacted from "effect/Redacted";
+
+import { githubLoginToken } from "./stacks/github-login.ts";
+
+const DOMAIN = "morgannstovold.com";
+
+// Cloudflare's published Turnstile test keys: always pass, work on any hostname.
+const TEST_TURNSTILE = {
+  sitekey: "1x00000000000000000000AA",
+  secret: Redacted.make("1x0000000000000000000000000000000AA"),
+};
+
+const turnstileKeys = (stage: string) =>
+  stage === "prod"
+    ? Cloudflare.Turnstile.Widget("ContactForm", { domains: [DOMAIN], mode: "managed" })
+    : Effect.succeed(TEST_TURNSTILE);
+
+export const Website = Cloudflare.Website.Astro(
+  "Website",
+  Effect.gen(function* () {
+    const stage = yield* Alchemy.Stage;
+    const turnstile = yield* turnstileKeys(stage);
+    const isProd = stage === "prod";
+
+    // CI passes GH_ACTIVITY_TOKEN (provisioned by stacks/github.ts). Locally, fall back to the GitHub login
+    // Alchemy already has, so `bun run dev` shows live activity with no setup. Never in prod: in CI that login is
+    // the Actions token, which expires when the job ends.
+    const githubFallback = isProd
+      ? Redacted.make("")
+      : // A profile without GitHub configured just gets the profile-link fallback instead of failing dev.
+        yield* githubLoginToken.pipe(Effect.catchCause(() => Effect.succeed(Redacted.make(""))));
+
+    return {
+      domain: isProd ? DOMAIN : undefined,
+      sessionKVBindingName: false,
+      // Every page is prerendered to static HTML unless it opts out with `export const prerender = false`.
+      astro: { output: "static", site: isProd ? `https://${DOMAIN}` : undefined },
+      memo: {
+        include: ["src/**", "public/**", "astro.config.ts", "package.json"],
+        // Setting `include` turns lockfile hashing off; keep dependency bumps triggering a rebuild.
+        lockfile: true,
+      },
+      env: {
+        CONTACT_TO_EMAIL: isProd ? Config.String("CONTACT_TO_EMAIL") : Config.succeed(""),
+        CONTACT_FROM_EMAIL: isProd ? Config.String("CONTACT_FROM_EMAIL") : Config.succeed(""),
+        RESEND_API_KEY: isProd ? Config.Redacted("RESEND_API_KEY") : Config.succeed(Redacted.make("")),
+        // Without it the GitHub activity section shows a plain profile link instead.
+        GH_ACTIVITY_TOKEN: Config.Redacted("GH_ACTIVITY_TOKEN").pipe(Config.withDefault(githubFallback)),
+        TURNSTILE_SITE_KEY: turnstile.sitekey,
+        TURNSTILE_SECRET_KEY: turnstile.secret,
+      },
+    };
+  }),
+);
+
+export type WebsiteEnv = Cloudflare.InferEnv<typeof Website>;
+
+export default Alchemy.Stack(
+  "morgannstovold",
+  {
+    providers: Layer.mergeAll(Cloudflare.providers(), GitHub.providers()),
+    state: Cloudflare.state(),
+  },
+  Effect.gen(function* () {
+    const website = yield* Website;
+    const github = yield* GitHub.GitHubEnv;
+
+    if ((yield* Alchemy.Stage) === "prod") {
+      // Lets LocalImage request resized copies via /cdn-cgi/image. Zone-wide, restored on destroy.
+      const { accountId } = yield* yield* Cloudflare.CloudflareEnvironment;
+      const zone = yield* Cloudflare.Zone.resolveZoneId({ accountId, zone: undefined, hostname: DOMAIN }).pipe(
+        Effect.orDie,
+      );
+      yield* Cloudflare.Zone.Setting("ImageTransformations", {
+        zoneId: zone,
+        settingId: "transformations",
+        value: "on",
+      });
+    }
+
+    if (github?.pr) {
+      yield* GitHub.Comment("PreviewComment", {
+        owner: github.owner,
+        repository: github.repository,
+        issueNumber: github.pr,
+        body: Output.interpolate`
+          ## Preview deployed
+
+          **Website:** ${website.url}
+
+          Built from commit \`${github.sha.slice(0, 7)}\`
+        `,
+      });
+    }
+
+    return { url: website.url };
+  }),
+);

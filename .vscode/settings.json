@@ -1,14 +1,9 @@
 {
   "editor.formatOnSave": true,
-  "files.associations": {
-    "*.css": "tailwindcss"
+  "[javascript][typescript][json][jsonc][css]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
-  "editor.codeActionsOnSave": {
-    "source.fixAll.biome": "explicit",
-    "source.organizeImports.biome": "explicit"
-  },
-  "tailwindCSS.experimental.classRegex": [
-    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-  ]
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  }
 }

@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Page not found">
+  <section class="flex min-h-[80svh] items-center pt-(--header-height)">
+    <div class="page">
+      <p class="label mb-6"><span class="text-signal">404</span> · No pulse</p>
+      <h1 class="display mb-8 text-[clamp(3rem,10vw,8rem)]">
+        This page <em class="italic">flatlined.</em>
+      </h1>
+      <svg class="mb-10 h-10 w-full max-w-xl" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 20 H600" stroke="var(--signal)" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+      </svg>
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm text-paper no-underline transition-colors hover:bg-signal"
+      >
+        ← Back to the home page
+      </a>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,53 @@
+---
+// Rendered on request as a server island (see Activity.astro), so the numbers stay current
+// while the rest of the page is static.
+import { getActivity } from "../lib/github";
+import { site } from "../site";
+import ActivityGrid from "./ActivityGrid.astro";
+
+const activity = await getActivity(site.github.user);
+Astro.response.headers.set("Cache-Control", "public, max-age=900");
+
+const ago = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+function timeAgo(iso: string) {
+  const days = Math.round((Date.parse(iso) - Date.now()) / 86_400_000);
+  if (days > -1) return "today";
+  if (days > -30) return ago.format(days, "day");
+  return ago.format(Math.round(days / 30), "month");
+}
+---
+
+{
+  activity ? (
+    <div class="grid gap-12 md:grid-cols-12">
+      <div class="min-w-0 md:col-span-8">
+        <p class="mb-6 flex items-baseline gap-3">
+          <span class="font-serif text-5xl tracking-tight tabular-nums">{activity.total.toLocaleString("en-US")}</span>
+          <span class="text-ink-2">contributions in the last year</span>
+        </p>
+        <ActivityGrid days={activity.days} />
+      </div>
+      <ul class="min-w-0 divide-y divide-rule border-y border-rule md:col-span-4">
+        {activity.repos.map((repo) => (
+          <li>
+            <a href={repo.url} target="_blank" rel="noopener" class="group block py-4 text-ink no-underline">
+              <span class="flex items-baseline justify-between gap-4">
+                <span class="font-mono text-sm group-hover:text-signal">{repo.name}</span>
+                <span class="label shrink-0">{timeAgo(repo.pushedAt)}</span>
+              </span>
+              {repo.description && <span class="mt-1 line-clamp-2 block text-sm text-ink-3">{repo.description}</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ) : (
+    <p class="text-ink-2">
+      Activity is taking a breather.{" "}
+      <a href={site.github.url} class="text-ink underline decoration-rule underline-offset-4 hover:decoration-signal">
+        See it on GitHub instead
+      </a>
+      .
+    </p>
+  )
+}

@@ -1,0 +1,49 @@
+---
+import { nav, site } from "../site";
+---
+
+<footer class="overflow-hidden border-t border-rule pt-16 pb-8">
+  <div class="page">
+    <div class="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+      <p class="max-w-[30ch] text-ink-2">
+        Websites for small businesses, built by an EMT in the {site.region}.
+      </p>
+      <nav class="flex gap-16 text-sm" aria-label="Footer">
+        <ul class="space-y-3">
+          {
+            nav.map((item) => (
+              <li>
+                <a href={item.href} class="text-ink-2 no-underline hover:text-ink">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <ul class="space-y-3">
+          {
+            site.social.map((link) => (
+              <li>
+                <a href={link.href} target="_blank" rel="noopener me" class="text-ink-2 no-underline hover:text-ink">
+                  {link.label} ↗
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+
+    <p
+      class="display mt-16 -mb-[0.12em] text-[clamp(3.5rem,15.5vw,14rem)] leading-[0.85] whitespace-nowrap text-ink select-none"
+      aria-hidden="true"
+    >
+      Morgan Stovold<span class="text-signal">.</span>
+    </p>
+
+    <div class="mt-8 flex flex-col gap-3 border-t border-rule pt-6 sm:flex-row sm:justify-between">
+      <p class="label">© {new Date().getFullYear()} Morgan Stovold</p>
+      <p class="label">Built with Astro · Served by Cloudflare</p>
+    </div>
+  </div>
+</footer>

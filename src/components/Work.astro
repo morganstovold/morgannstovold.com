@@ -1,0 +1,87 @@
+---
+import { projects } from "../site";
+import LocalImage from "./LocalImage.astro";
+import SectionHead from "./SectionHead.astro";
+---
+
+<section id="work" class="py-24 md:py-36">
+  <div class="page">
+    <SectionHead number="01" label="Selected work" />
+    <div class="mt-8 mb-16 grid gap-6 md:mb-24 md:grid-cols-12">
+      <h2 class="reveal display text-[clamp(2.75rem,7vw,5.5rem)] md:col-span-7">Recent work</h2>
+      <p class="reveal max-w-[42ch] self-end text-ink-2 md:col-span-5 md:justify-self-end">
+        Real sites for real businesses. Each one built from scratch, tuned for speed, and handed over in days, not
+        months.
+      </p>
+    </div>
+
+    <ol class="space-y-24 md:space-y-36">
+      {
+        projects.map((project, index) => (
+          <li class="reveal grid gap-8 md:grid-cols-12 md:items-center md:gap-12">
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener"
+              class:list={["group block md:col-span-7", index % 2 === 1 && "md:order-2"]}
+              aria-label={`Visit ${project.title} (opens in a new tab)`}
+            >
+              <div class="overflow-hidden rounded-lg border border-rule bg-paper-2 shadow-[0_30px_60px_-30px_rgb(0_0_0/0.35)]">
+                <div class="flex items-center gap-1.5 border-b border-rule px-4 py-3">
+                  <span class="size-2 rounded-full bg-rule" />
+                  <span class="size-2 rounded-full bg-rule" />
+                  <span class="size-2 rounded-full bg-rule" />
+                  <span class="ml-3 truncate font-mono text-[0.7rem] text-ink-3">
+                    {project.url.replace("https://", "")}
+                  </span>
+                </div>
+                <div class="aspect-16/10 overflow-hidden">
+                  <LocalImage
+                    src={project.image}
+                    alt={`Home page of the ${project.title} website`}
+                    sizes="(min-width: 768px) 58vw, 100vw"
+                    class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  />
+                </div>
+              </div>
+            </a>
+
+            <div class:list={["md:col-span-5", index % 2 === 1 && "md:order-1"]}>
+              <p class="label mb-5">
+                <span class="text-signal">{String(index + 1).padStart(2, "0")}</span> — {project.kind} · {project.year}
+              </p>
+              <h3 class="mb-5 font-serif text-[clamp(2rem,3.5vw,2.75rem)] leading-[1.05] tracking-tight">
+                {project.title}
+              </h3>
+              <p class="mb-7 leading-relaxed text-ink-2">{project.summary}</p>
+              <ul class="mb-7 space-y-2 border-y border-rule py-5">
+                {project.highlights.map((highlight) => (
+                  <li class="flex items-baseline gap-3 text-sm">
+                    <span class="h-px w-3 shrink-0 translate-y-[-0.25em] bg-signal" aria-hidden="true" />
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
+              <p class="mb-8 font-mono text-xs leading-relaxed text-ink-3">{project.stack.join(" / ")}</p>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener"
+                class="group inline-flex items-center gap-2 border-b border-ink pb-1 text-sm text-ink no-underline transition-colors hover:border-signal hover:text-signal"
+              >
+                Visit site
+                <span
+                  class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden="true"
+                >
+                  ↗
+                </span>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

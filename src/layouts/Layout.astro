@@ -1,0 +1,91 @@
+---
+import { Font } from "astro:assets";
+
+import morgan from "../assets/morgan.webp";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { site } from "../site";
+import "../styles/global.css";
+
+interface Props {
+  /** Page name, e.g. "Contact". Leave out on the home page. */
+  title?: string;
+  description?: string;
+}
+
+const { title, description = site.description } = Astro.props;
+const fullTitle = title ? `${title} · ${site.name}` : site.title;
+// Prerendered pages see /contact.html here (build.format: "file"); the public URL is /contact.
+const canonical = Astro.site ? new URL(Astro.url.pathname.replace(/(\/index)?\.html$/, ""), Astro.site) : undefined;
+const imageUrl = Astro.site ? new URL(morgan.src, Astro.site) : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f5ef" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141210" media="(prefers-color-scheme: dark)" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {imageUrl && <meta property="og:image" content={imageUrl} />}
+    <meta name="twitter:card" content="summary" />
+
+    <Font cssVariable="--font-fraunces-family" preload={[{ style: "normal" }, { style: "italic" }]} />
+    <Font cssVariable="--font-inter-family" preload={[{ style: "normal" }]} />
+    <Font cssVariable="--font-mono-family" />
+
+    <script is:inline>
+      // Pick the theme before first paint so there's no flash: a saved choice, else the system setting.
+      // Storage can throw in private windows.
+      let theme = null;
+      try {
+        theme = localStorage.getItem("theme");
+      } catch {}
+      document.documentElement.dataset.theme =
+        theme === "light" || theme === "dark"
+          ? theme
+          : matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+    </script>
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only z-100 bg-ink px-4 py-2 text-paper focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+      >Skip to content</a
+    >
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.08, rootMargin: "0px 0px -60px 0px" },
+      );
+      for (const element of document.querySelectorAll(".reveal")) {
+        observer.observe(element);
+      }
+    </script>
+  </body>
+</html>

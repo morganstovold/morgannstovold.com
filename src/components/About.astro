@@ -1,0 +1,72 @@
+---
+import morgan from "../assets/morgan.webp";
+import { timeline } from "../site";
+import LocalImage from "./LocalImage.astro";
+import SectionHead from "./SectionHead.astro";
+---
+
+<section id="about" class="py-24 md:py-36">
+  <div class="page">
+    <SectionHead number="03" label="About" />
+
+    <div class="mt-8 grid gap-16 md:grid-cols-12 md:gap-12">
+      <div class="reveal md:col-span-5">
+        <div class="relative mx-auto max-w-sm md:sticky md:top-[calc(var(--header-height)+2rem)]">
+          <div class="absolute inset-x-0 bottom-0 h-[78%] rounded-t-full bg-signal-soft ring-1 ring-signal/20" aria-hidden="true"></div>
+          <LocalImage
+            src={morgan}
+            alt="Morgan Stovold, sitting and smiling, in a black short-sleeve shirt and light jeans"
+            sizes="(min-width: 768px) 384px, 90vw"
+            class="relative h-auto w-full"
+          />
+          <p class="label mt-4 text-center">Morgan Stovold · Est. 2007</p>
+        </div>
+      </div>
+
+      <div class="md:col-span-7">
+        <h2 class="reveal display mb-10 text-[clamp(2.75rem,6.5vw,5rem)]">
+          Two jobs,<br /><em class="italic">one habit.</em>
+        </h2>
+
+        <div class="reveal max-w-[60ch] space-y-5 text-lg leading-relaxed text-ink-2">
+          <p>
+            I'm Morgan. I started programming in 2019 and spent the last few years building websites for local
+            businesses: a remodeler, a Hawaiian restaurant, a family foundation in Benicia.
+          </p>
+          <p>
+            In 2026 I took a turn. I earned my EMT certification in March, and since June I've been working on an
+            ambulance around the Bay Area. I'm applying to paramedic school now, and the long-term goal is <span class="text-ink">paramedic firefighter</span>.
+          </p>
+          <p>
+            I still build websites, and the two jobs ask for more of the same than you'd think: stay calm, communicate
+            clearly, and do it right the first time. Hire me and you work with one person who picks up the phone.
+          </p>
+        </div>
+
+        <h3 class="reveal label mt-16 mb-6">The path so far</h3>
+        <ol class="reveal relative border-l border-rule">
+          {
+            timeline.map((step, index) => {
+              const future = step.when === "Next" || step.when === "Goal";
+              return (
+                <li class="relative pb-8 pl-8 last:pb-0">
+                  <span
+                    class:list={[
+                      "absolute top-1.5 -left-[5px] size-[9px] rounded-full border",
+                      future ? "border-ink-3 bg-paper" : "border-signal bg-signal",
+                      index === 3 && "ring-4 ring-signal-soft",
+                    ]}
+                    aria-hidden="true"
+                  />
+                  <p class="label mb-1">{step.when}</p>
+                  <p class:list={["font-serif text-xl tracking-tight", future && "text-ink-2 italic"]}>{step.what}</p>
+                  {step.note && <p class="mt-1 text-sm text-ink-3">{step.note}</p>}
+                </li>
+              );
+            })
+          }
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
