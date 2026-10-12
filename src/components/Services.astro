@@ -1,0 +1,46 @@
+---
+import { services } from "../site";
+import SectionHead from "./SectionHead.astro";
+
+const steps = ["Call", "Design", "Build", "Launch"];
+---
+
+<section id="services" class="bg-paper-2 py-24 md:py-36">
+  <div class="page">
+    <SectionHead number="02" label="Services" />
+    <div class="mt-8 mb-16 grid gap-6 md:mb-24 md:grid-cols-12">
+      <h2 class="reveal display text-[clamp(2.75rem,7vw,5.5rem)] md:col-span-8">
+        One person, <em class="italic">start to finish.</em>
+      </h2>
+      <p class="reveal max-w-[40ch] self-end text-ink-2 md:col-span-4 md:justify-self-end">
+        No agency markup and no handoffs. You talk to the person writing the code, from the first call to launch day.
+      </p>
+    </div>
+
+    <div class="grid gap-12 md:grid-cols-3 md:gap-10">
+      {
+        services.map((service, index) => (
+          <article class="reveal border-t border-rule pt-6" style={`transition-delay: ${index * 90}ms`}>
+            <p class="label mb-8">{String(index + 1).padStart(2, "0")}</p>
+            <h3 class="mb-4 font-serif text-3xl tracking-tight">{service.title}</h3>
+            <p class="leading-relaxed text-ink-2">{service.body}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="reveal mt-20 flex flex-col gap-6 rounded-lg border border-rule p-6 md:mt-28 md:flex-row md:items-center md:justify-between md:p-8">
+      <p class="font-serif text-2xl tracking-tight md:text-3xl">Most sites launch in one to two weeks.</p>
+      <ol class="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs tracking-widest text-ink-3 uppercase">
+        {
+          steps.map((step, index) => (
+            <li class="flex items-center gap-3">
+              {index > 0 && <span class="h-px w-6 bg-rule" aria-hidden="true" />}
+              {step}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>

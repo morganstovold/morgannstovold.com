@@ -1,0 +1,169 @@
+---
+import { site } from "../site";
+import ContactForm from "./ContactForm.astro";
+import SectionHead from "./SectionHead.astro";
+
+interface Props {
+  /** Render the form inline (on-demand pages) instead of as a server island (static pages). */
+  inline?: boolean;
+}
+
+const { inline = false } = Astro.props;
+---
+
+<section id="contact" class="py-24 md:py-36">
+  <div class="page">
+    <SectionHead number="05" label="Contact" />
+    <div class="mt-8 grid gap-16 md:grid-cols-12 md:gap-12">
+      <div class="md:col-span-5">
+        <h2 class="reveal display mb-8 text-[clamp(2.75rem,7vw,5.5rem)]">
+          Let's build<br /><em class="italic">something good.</em>
+        </h2>
+        <p class="reveal mb-10 max-w-[40ch] text-lg leading-relaxed text-ink-2">
+          Tell me about your business and what you need. I reply to every message myself, usually within a day.
+        </p>
+
+        <div class="reveal space-y-8">
+          <div>
+            <p class="label mb-3">Email</p>
+            <button
+              type="button"
+              data-copy-email={site.email}
+              class="group flex items-center gap-3 font-serif text-2xl tracking-tight text-ink md:text-3xl"
+            >
+              <span class="border-b border-rule pb-0.5 transition-colors group-hover:border-signal">{site.email}</span>
+              <span data-copy-label class="label transition-colors group-hover:text-signal">Copy</span>
+            </button>
+          </div>
+          <div>
+            <p class="label mb-3">Elsewhere</p>
+            <ul class="flex flex-wrap gap-x-6 gap-y-2">
+              {
+                site.social.map((link) => (
+                  <li>
+                    <a href={link.href} target="_blank" rel="noopener me" class="text-ink-2 no-underline hover:text-signal">
+                      {link.label} ↗
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal md:col-span-7">
+        <div class="rounded-xl border border-rule bg-paper-2 p-6 sm:p-8 md:p-10">
+          {
+            inline ? (
+              <ContactForm />
+            ) : (
+              <ContactForm server:defer>
+                <div slot="fallback" class="space-y-6" aria-busy="true">
+                  <div class="grid gap-6 sm:grid-cols-2">
+                    <div class="h-[74px] animate-pulse rounded-md bg-rule/50" />
+                    <div class="h-[74px] animate-pulse rounded-md bg-rule/50" />
+                  </div>
+                  <div class="h-16 animate-pulse rounded-md bg-rule/50" />
+                  <div class="h-40 animate-pulse rounded-md bg-rule/50" />
+                  <noscript>
+                    <p class="text-ink-2">
+                      The form needs JavaScript. Email me at <a href={`mailto:${site.email}`}>{site.email}</a> instead.
+                    </p>
+                  </noscript>
+                </div>
+              </ContactForm>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { actions, isInputError } from "astro:actions";
+
+  // Copy-to-clipboard for the email address, falling back to a mailto link.
+  for (const button of document.querySelectorAll<HTMLButtonElement>("[data-copy-email]")) {
+    const label = button.querySelector("[data-copy-label]")!;
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copyEmail!);
+        label.textContent = "Copied";
+        setTimeout(() => (label.textContent = "Copy"), 2000);
+      } catch {
+        location.href = `mailto:${button.dataset.copyEmail}`;
+      }
+    });
+  }
+
+  // The form can arrive later as a server island, so wire it up whenever it shows up.
+  type Turnstile = { render: (el: HTMLElement) => void; reset: (el?: HTMLElement) => void };
+  let turnstileLoading: Promise<Turnstile> | undefined;
+  function loadTurnstile() {
+    turnstileLoading ??= new Promise((resolve) => {
+      const callback = "__onTurnstile";
+      (window as unknown as Record<string, () => void>)[callback] = () =>
+        resolve((window as unknown as { turnstile: Turnstile }).turnstile);
+      const script = document.createElement("script");
+      script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=${callback}`;
+      script.async = true;
+      document.head.appendChild(script);
+    });
+    return turnstileLoading;
+  }
+
+  async function enhance(form: HTMLFormElement) {
+    if (form.dataset.enhanced) return;
+    form.dataset.enhanced = "true";
+
+    const widget = form.querySelector<HTMLElement>(".cf-turnstile");
+    const turnstile = widget ? await loadTurnstile() : undefined;
+    if (widget && turnstile) turnstile.render(widget);
+
+    const button = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
+    const buttonLabel = form.querySelector("[data-submit-label]")!;
+    const formError = form.querySelector<HTMLElement>("[data-form-error]")!;
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      for (const error of form.querySelectorAll<HTMLElement>("[data-error]")) error.hidden = true;
+      formError.hidden = true;
+      button.disabled = true;
+      buttonLabel.textContent = "Sending…";
+
+      const { data, error } = await actions.contact(new FormData(form));
+
+      button.disabled = false;
+      buttonLabel.textContent = "Send message";
+      if (data?.sent) {
+        form.hidden = true;
+        const sent = form.parentElement?.querySelector<HTMLElement>("[data-contact-sent]");
+        if (sent) {
+          sent.hidden = false;
+          sent.focus();
+        }
+        return;
+      }
+      if (isInputError(error)) {
+        for (const [field, messages] of Object.entries(error.fields)) {
+          const target = form.querySelector<HTMLElement>(`[data-error="${field}"]`);
+          if (target && messages?.[0]) {
+            target.textContent = messages[0];
+            target.hidden = false;
+          }
+        }
+        form.querySelector<HTMLElement>(`[name="${Object.keys(error.fields)[0]}"]`)?.focus();
+      } else if (error) {
+        formError.textContent = error.message;
+        formError.hidden = false;
+        if (widget) turnstile?.reset(widget);
+      }
+    });
+  }
+
+  const enhanceAll = () => document.querySelectorAll<HTMLFormElement>("[data-contact-form]").forEach(enhance);
+  enhanceAll();
+  new MutationObserver(enhanceAll).observe(document.body, { childList: true, subtree: true });
+</script>

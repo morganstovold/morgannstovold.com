@@ -1,0 +1,116 @@
+---
+import { site } from "../site";
+---
+
+<section class="relative flex min-h-svh flex-col pt-(--header-height)">
+  <div class="page flex flex-1 flex-col justify-center py-12 md:py-16">
+    <div class="mb-10 flex flex-wrap items-center justify-between gap-3 md:mb-14">
+      <p class="label">Web developer &amp; EMT</p>
+      <p class="label">
+        {site.location}<span class="hidden sm:inline">&ensp;·&ensp;<time data-local-time>Pacific time</time></span>
+      </p>
+    </div>
+
+    <h1 class="display text-[clamp(3.25rem,11vw,10rem)] text-ink">
+      Websites built<br />
+      with <em class="font-serif italic">steady&nbsp;hands</em><span class="text-signal">.</span>
+    </h1>
+
+    <!-- A single heartbeat on a flat line: code on one side, the ambulance on the other. -->
+    <div class="relative my-10 md:my-14" aria-hidden="true">
+      <svg class="h-16 w-full overflow-visible md:h-24" viewBox="0 0 1200 100" preserveAspectRatio="none">
+        <path
+          class="ecg-base"
+          d="M0 60 H560 q10 -12 20 0 H608 l7 9 l11 -62 l12 82 l8 -29 H700 q16 -18 32 0 H1200"
+          fill="none"
+          stroke="var(--rule)"
+          stroke-width="1.5"
+          vector-effect="non-scaling-stroke"></path>
+        <path
+          class="ecg-trace"
+          pathLength="1"
+          d="M0 60 H560 q10 -12 20 0 H608 l7 9 l11 -62 l12 82 l8 -29 H700 q16 -18 32 0 H1200"
+          fill="none"
+          stroke="var(--signal)"
+          stroke-width="2"
+          stroke-linejoin="round"
+          vector-effect="non-scaling-stroke"></path>
+      </svg>
+    </div>
+
+    <div class="grid gap-10 md:grid-cols-12 md:items-end">
+      <p class="max-w-[38ch] text-lg leading-relaxed text-ink-2 md:col-span-6 md:text-xl">
+        I design and build fast, hand-coded websites for small businesses and nonprofits. Off the keyboard, I'm an EMT
+        in the Bay Area, working toward paramedic school.
+      </p>
+      <div class="flex flex-col gap-5 md:col-span-6 md:items-end">
+        <p class="flex items-center gap-2.5 text-sm text-ink-2">
+          <span class="relative flex size-2">
+            <span class="absolute inline-flex size-full animate-ping rounded-full bg-ok opacity-60 motion-reduce:hidden"
+            ></span>
+            <span class="relative inline-flex size-2 rounded-full bg-ok"></span>
+          </span>
+          Taking on select freelance projects
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="#work"
+            class="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm text-paper no-underline transition-colors hover:bg-signal"
+          >
+            See the work
+            <span class="transition-transform group-hover:translate-y-0.5" aria-hidden="true">↓</span>
+          </a>
+          <a
+            href="#contact"
+            class="inline-flex items-center rounded-full border border-ink/25 px-6 py-3.5 text-sm text-ink no-underline transition-colors hover:border-ink"
+          >
+            Start a project
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ecg-trace {
+    stroke-dasharray: 0.08 1;
+    stroke-dashoffset: 0.08;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .ecg-trace {
+      animation: sweep 3.2s cubic-bezier(0.45, 0, 0.55, 1) 0.4s infinite;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    /* No sweep: show the whole trace in red instead. */
+    .ecg-trace {
+      stroke-dasharray: none;
+    }
+  }
+
+  @keyframes sweep {
+    from {
+      stroke-dashoffset: 0.08;
+    }
+    to {
+      stroke-dashoffset: -1;
+    }
+  }
+</style>
+
+<script>
+  const time = document.querySelector("[data-local-time]");
+  if (time) {
+    const format = new Intl.DateTimeFormat("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      timeZone: "America/Los_Angeles",
+    });
+    const tick = () => (time.textContent = `${format.format(new Date())} PT`);
+    tick();
+    setInterval(tick, 30_000);
+  }
+</script>

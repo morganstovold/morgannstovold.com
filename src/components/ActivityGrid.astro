@@ -1,0 +1,27 @@
+---
+interface Props {
+  /** One entry per day, oldest first. Leave out to draw an empty placeholder grid. */
+  days?: { date: string; count: number; level: number }[];
+}
+
+const { days } = Astro.props;
+// 53 columns of 7 days, like GitHub's own calendar.
+const cells = days ?? Array.from({ length: 53 * 7 }, () => undefined);
+const opacity = ["0", "0.3", "0.5", "0.75", "1"];
+---
+
+<div
+  class="grid auto-cols-fr grid-flow-col grid-rows-7 gap-[2px] sm:gap-[3px] md:gap-1"
+  role={days ? "img" : undefined}
+  aria-label={days ? "Daily GitHub contributions over the past year" : undefined}
+>
+  {
+    cells.map((day) => (
+      <span class="relative aspect-square rounded-[2px] bg-rule/60" title={day ? `${day.count} on ${day.date}` : undefined}>
+        {day && day.level > 0 && (
+          <span class="absolute inset-0 rounded-[2px] bg-signal" style={`opacity: ${opacity[day.level]}`} />
+        )}
+      </span>
+    ))
+  }
+</div>

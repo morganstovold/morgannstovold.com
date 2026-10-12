@@ -1,0 +1,85 @@
+---
+// Needs the Turnstile site key from the Worker env, so it renders on request: directly on /contact,
+// and as a server island on the static home page. Contact.astro's script submits it without a reload.
+import { actions, isInputError } from "astro:actions";
+import { env } from "cloudflare:workers";
+
+import { projectKinds } from "../actions";
+
+const result = Astro.getActionResult(actions.contact);
+const fieldErrors = isInputError(result?.error) ? result.error.fields : {};
+const formError = result?.error && !isInputError(result.error) ? result.error.message : undefined;
+const sent = result?.data?.sent === true;
+
+const labelClass = "label mb-2 block";
+const inputClass =
+  "w-full rounded-md border border-rule bg-paper px-4 py-3 text-ink placeholder-ink-3 transition-colors hover:border-ink-3 focus:border-ink focus:outline-none";
+const errorClass = "mt-2 text-sm text-signal";
+---
+
+<div data-contact-sent hidden={!sent} role="status" tabindex="-1" class="rounded-lg border border-rule bg-paper p-8">
+  <p class="mb-2 font-serif text-3xl tracking-tight">Message sent.</p>
+  <p class="text-ink-2">Thanks for reaching out. I'll get back to you within a day or two, usually sooner.</p>
+</div>
+
+{
+  !sent && (
+    <form data-contact-form method="POST" action={`/contact${actions.contact}`} class="space-y-6" novalidate>
+      <p data-form-error hidden={!formError} role="alert" class="rounded-md border border-signal/40 bg-signal-soft p-4 text-sm">
+        {formError}
+      </p>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div>
+          <label for="name" class={labelClass}>Name</label>
+          <input type="text" id="name" name="name" required autocomplete="name" class={inputClass} />
+          <p data-error="name" class={errorClass} hidden={!fieldErrors.name}>{fieldErrors.name?.[0]}</p>
+        </div>
+        <div>
+          <label for="email" class={labelClass}>Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email" class={inputClass} />
+          <p data-error="email" class={errorClass} hidden={!fieldErrors.email}>{fieldErrors.email?.[0]}</p>
+        </div>
+      </div>
+      <fieldset>
+        <legend class={labelClass}>What do you need?</legend>
+        <div class="flex flex-wrap gap-2">
+          {Object.entries(projectKinds).map(([value, label], index) => (
+            <label class="cursor-pointer">
+              <input type="radio" name="kind" value={value} checked={index === 0} class="peer sr-only" />
+              <span class="inline-block rounded-full border border-rule px-4 py-2 text-sm text-ink-2 transition-colors peer-checked:border-ink peer-checked:bg-ink peer-checked:text-paper peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-signal hover:border-ink-3">
+                {label}
+              </span>
+            </label>
+          ))}
+        </div>
+        <p data-error="kind" class={errorClass} hidden={!fieldErrors.kind}>{fieldErrors.kind?.[0]}</p>
+      </fieldset>
+      <div>
+        <label for="message" class={labelClass}>About the project</label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows="5"
+          placeholder="What does your business do, and what should the site help with?"
+          class:list={[inputClass, "resize-y"]}
+        />
+        <p data-error="message" class={errorClass} hidden={!fieldErrors.message}>{fieldErrors.message?.[0]}</p>
+      </div>
+      <div class="hidden" aria-hidden="true">
+        <label for="website">Leave this field empty</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+      <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+        <div class="cf-turnstile min-h-[65px]" data-sitekey={env.TURNSTILE_SITE_KEY} data-appearance="interaction-only" />
+        <button
+          type="submit"
+          class="group inline-flex items-center justify-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm text-paper transition-colors hover:bg-signal disabled:cursor-wait disabled:opacity-60"
+        >
+          <span data-submit-label>Send message</span>
+          <span class="transition-transform group-hover:translate-x-0.5" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </form>
+  )
+}

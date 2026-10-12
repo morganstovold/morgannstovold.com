@@ -1,0 +1,13 @@
+---
+// Rendered on request so the form works without JavaScript and can show the result of a submission.
+import Contact from "../components/Contact.astro";
+import Layout from "../layouts/Layout.astro";
+
+export const prerender = false;
+---
+
+<Layout title="Contact" description="Start a website project with Morgan Stovold.">
+  <div class="pt-(--header-height)">
+    <Contact inline />
+  </div>
+</Layout>

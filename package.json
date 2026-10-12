@@ -1,33 +1,39 @@
 {
   "name": "morgannstovold.com",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "start": "next start",
-    "lint": "biome check",
-    "format": "biome format --write"
+    "dev": "alchemy dev",
+    "deploy": "alchemy deploy",
+    "destroy": "alchemy destroy",
+    "build": "astro build",
+    "lint": "oxlint",
+    "format": "oxfmt",
+    "check": "astro check && oxlint && oxfmt --check",
+    "check:fix": "astro check && oxlint && oxfmt",
+    "images": "bun scripts/optimize-images.ts"
   },
   "dependencies": {
-    "@radix-ui/react-dialog": "^1.1.15",
-    "@radix-ui/react-slot": "^1.2.3",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "lucide-react": "^0.542.0",
-    "next": "15.5.2",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "tailwind-merge": "^3.3.1"
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.6",
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.0",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "tailwindcss": "^4",
-    "tw-animate-css": "^1.3.7",
-    "typescript": "^5"
+    "@alchemy.run/frontend-frameworks": "2.0.0-beta.81",
+    "@astrojs/check": "^0.9.10",
+    "@cloudflare/workers-types": "^5.20261006.1",
+    "@effect/platform-bun": "^4.0.1",
+    "@effect/platform-node": "^4.0.1",
+    "@types/bun": "^1.4.2",
+    "alchemy": "2.0.0-beta.81",
+    "effect": "^4.0.1",
+    "oxfmt": "^0.72.0",
+    "oxlint": "^1.87.0",
+    "sharp": "^0.35.5",
+    "typescript": "^6"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

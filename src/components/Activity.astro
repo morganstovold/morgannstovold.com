@@ -1,0 +1,37 @@
+---
+import { site } from "../site";
+import ActivityFeed from "./ActivityFeed.astro";
+import ActivityGrid from "./ActivityGrid.astro";
+import SectionHead from "./SectionHead.astro";
+---
+
+<section id="activity" class="bg-paper-2 py-24 md:py-32">
+  <div class="page">
+    <SectionHead number="04" label="Activity" />
+    <div class="mt-8 mb-14 grid gap-6 md:grid-cols-12">
+      <h2 class="reveal display text-[clamp(2.75rem,7vw,5.5rem)] md:col-span-7">
+        Still <em class="italic">shipping.</em>
+      </h2>
+      <p class="reveal max-w-[40ch] self-end text-ink-2 md:col-span-5 md:justify-self-end">
+        Between shifts, the commits keep coming. Pulled live from{" "}
+        <a href={site.github.url} class="text-ink underline decoration-rule underline-offset-4 hover:decoration-signal"
+          >GitHub</a
+        >.
+      </p>
+    </div>
+
+    <ActivityFeed server:defer>
+      <div slot="fallback" class="grid gap-12 md:grid-cols-12" aria-busy="true">
+        <div class="min-w-0 animate-pulse md:col-span-8">
+          <p class="mb-6 h-12 w-64 rounded bg-rule/60"></p>
+          <ActivityGrid />
+        </div>
+        <div class="animate-pulse space-y-4 md:col-span-4">
+          <p class="h-14 rounded bg-rule/60"></p>
+          <p class="h-14 rounded bg-rule/60"></p>
+          <p class="h-14 rounded bg-rule/60"></p>
+        </div>
+      </div>
+    </ActivityFeed>
+  </div>
+</section>
