@@ -6,12 +6,11 @@ import SectionHead from "./SectionHead.astro";
 
 <section id="work" class="py-24 md:py-36">
   <div class="page">
-    <SectionHead number="01" label="Selected work" />
+    <SectionHead number="01" label="Work" />
     <div class="mt-8 mb-16 grid gap-6 md:mb-24 md:grid-cols-12">
       <h2 class="reveal display text-[clamp(2.75rem,7vw,5.5rem)] md:col-span-7">Recent work</h2>
       <p class="reveal max-w-[42ch] self-end text-ink-2 md:col-span-5 md:justify-self-end">
-        Real sites for real businesses. Each one built from scratch, tuned for speed, and handed over in days, not
-        months.
+        Client websites and the tools I build for myself, all written from scratch.
       </p>
     </div>
 
@@ -38,7 +37,7 @@ import SectionHead from "./SectionHead.astro";
                 <div class="aspect-16/10 overflow-hidden">
                   <LocalImage
                     src={project.image}
-                    alt={`Home page of the ${project.title} website`}
+                    alt={`Screenshot of ${project.title}`}
                     sizes="(min-width: 768px) 58vw, 100vw"
                     class="size-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   />
@@ -69,7 +68,7 @@ import SectionHead from "./SectionHead.astro";
                 rel="noopener"
                 class="group inline-flex items-center gap-2 border-b border-ink pb-1 text-sm text-ink no-underline transition-colors hover:border-signal hover:text-signal"
               >
-                Visit site
+                Visit
                 <span
                   class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   aria-hidden="true"

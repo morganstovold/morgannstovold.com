@@ -3,8 +3,8 @@ import { ActionError, defineAction } from "astro:actions";
 import { env } from "cloudflare:workers";
 
 export const projectKinds = {
-  new: "A new website",
-  redesign: "Redesigning a site",
+  new: "A website",
+  app: "An app or tool",
   updates: "Fixes or updates",
   other: "Something else",
 } as const;
@@ -46,7 +46,7 @@ export const server = {
           from: env.CONTACT_FROM_EMAIL,
           to: env.CONTACT_TO_EMAIL,
           reply_to: input.email,
-          subject: `Website inquiry: ${projectKinds[input.kind]} (${input.name})`,
+          subject: `Project inquiry: ${projectKinds[input.kind]} (${input.name})`,
           text: `From: ${input.name} <${input.email}>\nNeeds: ${projectKinds[input.kind]}\n\n${input.message}`,
         }),
       });

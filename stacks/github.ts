@@ -1,9 +1,9 @@
 // One-off stack that provisions everything CI needs: a scoped Cloudflare API token plus the GitHub
 // Actions secrets and variables the deploy workflow reads. Re-run only to rotate the token or change values:
 //   bun alchemy deploy --config stacks/github.ts --profile admin
+import * as Cloudflare from "@alchemy.run/cloudflare";
+import * as GitHub from "@alchemy.run/github";
 import * as Alchemy from "alchemy";
-import * as Cloudflare from "alchemy/Cloudflare";
-import * as GitHub from "alchemy/GitHub";
 import * as Config from "effect/Config";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";

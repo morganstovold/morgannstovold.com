@@ -1,14 +1,15 @@
 import type { ImageMetadata } from "astro";
 
 import gotPlateLunch from "./assets/work/gotplatelunch.webp";
+import jobWatch from "./assets/work/jobwatch.webp";
 import padilla from "./assets/work/padilla.webp";
 import ripple from "./assets/work/ripple.webp";
 
 export const site = {
   name: "Morgan Stovold",
-  title: "Morgan Stovold — Web developer & EMT",
+  title: "Morgan Stovold — Developer & EMT",
   description:
-    "Morgan Stovold builds fast, hand-coded websites for small businesses and nonprofits in the Bay Area. Also an EMT, working toward paramedic school.",
+    "Morgan Stovold builds websites, apps, and tools in the Bay Area. Also an EMT, working toward paramedic school.",
   email: "morgan@stovold.dev",
   location: "Benicia, California",
   region: "Bay Area",
@@ -22,7 +23,6 @@ export const site = {
 
 export const nav = [
   { href: "/#work", label: "Work" },
-  { href: "/#services", label: "Services" },
   { href: "/#about", label: "About" },
   { href: "/#contact", label: "Contact" },
 ];
@@ -39,6 +39,21 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    title: "EMT Job Watch",
+    kind: "Personal tool · job alerts",
+    year: "2026",
+    url: "https://jobs.stovold.dev",
+    image: jobWatch,
+    summary:
+      "Good EMT jobs can close within minutes of posting, so I built a watcher that checks 14 Bay Area job boards every minute and sends a push to my phone and an email the moment a 911 EMT or fire recruit opening goes up.",
+    highlights: [
+      "14 boards checked every minute",
+      "Push alerts with email fallback",
+      "Hiring emails become timed reminders",
+    ],
+    stack: ["TypeScript", "Cloudflare Workers", "D1", "Queues", "Workflows", "Alchemy", "Pushover"],
+  },
   {
     title: "The Ripple Effect of Life",
     kind: "Nonprofit foundation",
@@ -74,24 +89,13 @@ export const projects: Project[] = [
   },
 ];
 
-export const services = [
-  {
-    title: "Design & build",
-    body: "A custom site designed around your business, not a template with your logo dropped in. Written by hand, so it stays fast and easy to change.",
-  },
-  {
-    title: "Speed & search",
-    body: "Clean markup, compressed images, and the technical SEO basics done right, so you show up when locals search and load before they give up.",
-  },
-  {
-    title: "Hosting & care",
-    body: "Deployed on Cloudflare's network with no monthly platform fees to speak of. I stick around for updates, fixes, and new pages when you need them.",
-  },
-];
-
 export const timeline = [
   { when: "2019", what: "Writes first lines of code", note: "Games, scripts, and a lot of broken websites." },
-  { when: "2025", what: "Freelancing for local businesses", note: "Remodelers, restaurants, and a nonprofit." },
+  {
+    when: "2025",
+    what: "Freelancing for local businesses",
+    note: "Sites for a remodeler, a restaurant, and a nonprofit.",
+  },
   { when: "Mar 2026", what: "Certified EMT", note: "" },
   { when: "Jun 2026", what: "Working as an EMT", note: "On an ambulance across the Bay Area." },
   { when: "Next", what: "Paramedic school", note: "Applications in progress." },

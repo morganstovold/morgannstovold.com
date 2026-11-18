@@ -15,23 +15,25 @@
     "images": "bun scripts/optimize-images.ts"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.3.6",
-    "tailwindcss": "^4.3.3"
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.4.13",
+    "tailwindcss": "^4.3.5"
   },
   "devDependencies": {
-    "@alchemy.run/frontend-frameworks": "2.0.0-beta.81",
-    "@astrojs/check": "^0.9.10",
-    "@cloudflare/workers-types": "^5.20261006.1",
-    "@effect/platform-bun": "^4.0.1",
-    "@effect/platform-node": "^4.0.1",
-    "@types/bun": "^1.4.2",
-    "alchemy": "2.0.0-beta.81",
-    "effect": "^4.0.1",
-    "oxfmt": "^0.72.0",
-    "oxlint": "^1.87.0",
+    "@alchemy.run/cloudflare": "2.0.0-beta.87",
+    "@alchemy.run/frontend-frameworks": "2.0.0-beta.87",
+    "@alchemy.run/github": "2.0.0-beta.87",
+    "@astrojs/check": "^0.9.12",
+    "@cloudflare/workers-types": "^5.20261118.1",
+    "@effect/platform-bun": "^4.1.4",
+    "@effect/platform-node": "^4.1.4",
+    "@types/bun": "^1.4.4",
+    "alchemy": "2.0.0-beta.87",
+    "effect": "^4.1.4",
+    "oxfmt": "^0.79.0",
+    "oxlint": "^1.94.0",
     "sharp": "^0.35.5",
-    "typescript": "^6"
+    "typescript": "^6.0.3"
   },
   "engines": {
     "node": ">=22"
